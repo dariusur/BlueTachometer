@@ -67,7 +67,7 @@ MAIN_0:
 ; configure timer/counter
 clr R16
 out TCCR0A, R16 ; Normal mode, TCCR0A - Timer/Counter Control Register A
-out TCNT0, R16 ; reset 16-bit timer LOW byte, TCNT0 - Timer/Counter Register
+out TCNT0, R16 ; reset 32-bit timer, TCNT0 - Timer/Counter Register
 clr R23 ; reset 32-bit timer
 clr R24 ; reset 32-bit timer
 clr R25 ; reset 32-bit timer
