@@ -3,20 +3,26 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-COM_PORT = 'COM6'
-BAUD_RATE = 9600
-X_LIMIT = 200
-Y_LIMIT = 100
+# USER PARAMETERS
+COM_PORT = 'COM6' # your COM port
+X_LIMIT = 200 # graph width
+Y_LIMIT = 100 # graph height
 SAVE_DIRECTORY = r"C:\Users\Darius\Desktop\\"
 
+# CONSTANTS - DO NOT CHANGE!
+BAUD_RATE = 9600
+MCU_CLK_PERIOD = 8.33e-7 # 1.2 GHZ
+
+# Called when the graph is closed.
 def on_close(event):
-    plt.close('all')
-    ser.close()
+    plt.close('all') # close all figure windows
+    ser.close() # close serial port
 
-ser = serial.Serial(COM_PORT, BAUD_RATE)
+ser = serial.Serial(COM_PORT, BAUD_RATE) # begin serial communication 
 
-x = np.linspace(0,0,0)
-y = np.linspace(0,0,0)
+### GRAPH CONFIGURATION START
+x = np.linspace(0,0,0) # create an empty array
+y = np.linspace(0,0,0) # create an empty array
 fig, ax1 = plt.subplots()
 ax2 = plt.twinx()
 fig.canvas.mpl_connect('close_event', on_close)
@@ -35,11 +41,14 @@ ax1.grid(which='minor', alpha=0.3)
 
 ax2.set_ylim([0, Y_LIMIT])
 
-fig.canvas.draw()   # note that the first draw comes before setting data 
+fig.canvas.draw()   # the first draw comes before setting data 
 plt.show(block=False)
 fig.canvas.flush_events()
+### GRAPH CONFIGURATION END
 
-ser.flush()
+ser.flush() # flush any garbage data
+
+# Discard the first measurement, because its always close to 0
 while(True):
     if (ser.in_waiting > 0):
         ser_data = ser.read(4)
@@ -50,28 +59,21 @@ while(True):
 
 sample_counter = 0
 
+### MAIN LOOP START
 while (True):
     try:
         if (ser.in_waiting > 0):
             ser_data = ser.read(4)
             sample_counter = sample_counter + 1
             x = np.append(x, sample_counter)
-            y = np.append(y, 1/((ser_data[0]|(ser_data[1]<<8)|(ser_data[2]<<16)|(ser_data[3]<<24)) * 8.33e-7))
+            y = np.append(y, 1/((ser_data[0]|(ser_data[1]<<8)|(ser_data[2]<<16)|(ser_data[3]<<24)) * MCU_CLK_PERIOD)) # convert time to frequency
             
-            text.set_text('{:.3f} Hz'.format(y[sample_counter-1]))
-            line.set_data(x, y)
+            text.set_text('{:.3f} Hz'.format(y[sample_counter-1])) # update text
+            line.set_data(x, y) # update data
 
+            # when sample_counter exceeds X_LIMIT move the graph window right to show most recent sample
             if (sample_counter > X_LIMIT):
                 ax1.set_xlim([sample_counter-X_LIMIT+1, sample_counter])
-
-            '''
-            if (sample_counter > 100):
-                line.set_data(x[(sample_counter-100):], y[(sample_counter-100):])
-                ax1.set_xlim([sample_counter-99, sample_counter])
-            else:
-                line.set_data(x[:(sample_counter-1)], y[:(sample_counter-1)])
-            # x = np.append(x, X_LIMIT+sample_counter)
-            '''
 
         # redraw everything
         fig.canvas.draw()
@@ -79,18 +81,16 @@ while (True):
     except:
         break
 
-
+# Export collected data
 print("Number of samples: {}".format(y.size))
 data_export = pd.DataFrame(data=y, index=x, columns=['f, Hz'])
 print("----------------------------------")
 print("Do you want to save data? (y/n)")
 save = input()
-while True:
-    if save == 'y':
-        print("Enter file name:")
-        file_name = input()
-        data_export.to_csv(SAVE_DIRECTORY + file_name + ".csv")
-        break
-    if save == 'n':
-        break
+if save == 'y':
+    print("Enter file name:")
+    file_name = input()
+    data_export.to_csv(SAVE_DIRECTORY + file_name + ".csv")
+
 print("Done!")
+### MAIN LOOP END
