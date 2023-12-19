@@ -5,7 +5,7 @@ import pandas as pd
 
 # USER PARAMETERS
 COM_PORT = 'COM6' # your COM port
-X_LIMIT = 200 # graph width
+X_LIMIT = 100 # graph width
 Y_LIMIT = 100 # graph height
 SAVE_DIRECTORY = r"C:\Users\Darius\Desktop\\"
 
@@ -46,8 +46,6 @@ plt.show(block=False)
 fig.canvas.flush_events()
 ### GRAPH CONFIGURATION END
 
-ser.flush() # flush any garbage data
-
 # Discard the first measurement, because its always close to 0
 while(True):
     if (ser.in_waiting > 0):
@@ -62,16 +60,18 @@ sample_counter = 0
 ### MAIN LOOP START
 while (True):
     try:
-        if (ser.in_waiting > 0):
-            ser_data = ser.read(4)
-            sample_counter = sample_counter + 1
-            x = np.append(x, sample_counter)
-            y = np.append(y, 1/((ser_data[0]|(ser_data[1]<<8)|(ser_data[2]<<16)|(ser_data[3]<<24)) * MCU_CLK_PERIOD)) # convert time to frequency
+        data_in = ser.in_waiting
+        if ((data_in % 4 == 0) and (data_in != 0)):
+            ser_data = ser.read(data_in)
+            for i in range(0, int(data_in/4)):    
+                sample_counter = sample_counter + 1
+                x = np.append(x, sample_counter)
+                y = np.append(y, 1/((ser_data[i*4]|(ser_data[i*4+1]<<8)|(ser_data[i*4+2]<<16)|(ser_data[i*4+3]<<24)) * MCU_CLK_PERIOD)) # convert time to frequency
             
             text.set_text('{:.3f} Hz'.format(y[sample_counter-1])) # update text
             line.set_data(x, y) # update data
 
-            # when sample_counter exceeds X_LIMIT move the graph window right to show most recent sample
+            # when sample_counter exceeds X_LIMIT move the graph window right to show the most recent sample
             if (sample_counter > X_LIMIT):
                 ax1.set_xlim([sample_counter-X_LIMIT+1, sample_counter])
 
