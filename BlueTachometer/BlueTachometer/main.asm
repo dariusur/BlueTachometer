@@ -71,23 +71,26 @@ out TCNT0, R16 ; reset 32-bit timer, TCNT0 - Timer/Counter Register
 clr R23 ; reset 32-bit timer
 clr R24 ; reset 32-bit timer
 clr R25 ; reset 32-bit timer
-; wait for input to go LOW (HALL sensor)
+; wait for input to go HIGH
 MAIN_1:
-sbic PINB, PINB4 ; Skip if Bit in I/O Register Cleared ; 1/2
+sbis PINB, PINB4 ; Skip if Bit in I/O Register Set ; 1/2
 rjmp MAIN_1 ; 2
+; wait for input to go LOW
+MAIN_2:
+sbic PINB, PINB4 ; Skip if Bit in I/O Register Cleared
+rjmp MAIN_2 ; 2
 ; start timer
 ldi R16, (1<<CS00) ; no prescaler = 1.2 MHz = 833 ns
 out TCCR0B, R16 ; TCCR0B - Timer/Counter Control Register B
-; wait for input to go HIGH
-MAIN_2:
-sbis PINB, PINB4 ; Skip if Bit in I/O Register Set
-rjmp MAIN_2 ; 2
-; wait for input to go LOW again
+; wait for input to go HIGH again
 MAIN_3:
-sbic PINB, PINB4; Skip if Bit in I/O Register Cleared
+sbis PINB, PINB4; Skip if Bit in I/O Register Set
 rjmp MAIN_3 ; 2
-; stop timer
+; wait for input to go LOW again
 MAIN_4:
+sbic PINB, PINB4; Skip if Bit in I/O Register Cleared
+rjmp MAIN_4 ; 2
+; stop timer
 clr R16 ; No clock source (Timer/Counter stopped)
 out TCCR0B, R16 ; TCCR0B - Timer/Counter Control Register B
 ; send time via UART
