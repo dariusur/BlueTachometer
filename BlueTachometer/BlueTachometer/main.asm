@@ -48,7 +48,7 @@ reti ; Interrupt Return
 RESET:
 ; init UART TX and HALL sensor input pins
 sbi DDRB, DDB3 ; configure PB3 pin as output
-ldi R16, (1<<PORTB3) | (1<<PORTB4) ; set PB3 pin high (active low) and enable pullup on PB4
+ldi R16, (1<<PORTB3) ; set PB3 pin high (active low)
 out PORTB, R16 ; PORTB - Port B Data Register
 ; init stack pointer
 ldi R16, LOW(RAMEND) ; set stack pointer to the top
