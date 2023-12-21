@@ -6,7 +6,7 @@ BlueTachometer, as the name suggests, is a wireless tachometer that transmits me
 3. A1120LUA-T Hall sensor
 4. Magnet (not shown in schematic)
 ## Description
-RPM measurement range: 0.000279 - 200 kHz?
+RPM measurement range: 0.017 - 300 kHz?
 Resolution: 32 bits
 
 ### ATtiny13
