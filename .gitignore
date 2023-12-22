@@ -1,3 +1,6 @@
 BlueTachometer/.vs/
 BlueTachometer/BlueTachometer/Debug/
 tests/
+*vsdx
+*csv
+*mlx
