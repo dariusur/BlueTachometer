@@ -24,6 +24,12 @@ BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magn
 
 ### Specs
 * RPM measurement range: 0.017 to 19000 RPM.
+
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
+
 |Resolution|RPM|
 |---|---|
 |<5|19000|
