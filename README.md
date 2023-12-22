@@ -24,9 +24,9 @@ BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magn
 
 ### Specs
 * RPM measurement range: 0.017 to 19000 RPM.
-* Resolution: 5 under 19000 RPM
-
-              5 under 19000 RPM
+|Resolution|RPM|
+|---|---|
+|<5|19000|
 
 In this range the tachometer can measure RPM with resolution of less than 5 RPM. Meaning that when you are measuring, let's say, 19000 RPM, then the nearby RPM values that can be detected are either 19005 or 18995. The device cannot measure any values inbetween, say, 19002, or 18996. This is due to resolution limit which is set by the frequency of CPU clock (1.2 MHz). One important thing to mention here, is that the resolution depends on the RPM values that are being measured. The resolution is large at low RPM values and small at large RPM values. This characteristic is illustrated in Fig. 1. The graph shows that there are two limits, one is the 32 bit timer limit, which represents the greatest possible RPM value that can be stored within 32 bits. This limit could only be reached if MCU would perform the measurement on every clock cycle. However, instructions take time to execute, and in worst case scenario it takes 4 clock cycles to perform the measurement. This brings us to the other, measurement algorithm limit, which represents the greatest RPM value that the MCU can actually measure. Even though I was able to reach this limit and measure 9000000 RPM by feeding the tachometer with a generated square wave, the resolution is so bad that the error is in the order of 100000s RPM.
 
