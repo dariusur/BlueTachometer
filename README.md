@@ -4,8 +4,11 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
 1. ATtiny13 microcontroller
 2. HC-05 Bluetooth module
 3. A1120LUA-T Hall sensor
-4. 2 X Ceramic capacitor 100 nF
-5. Magnet (not shown in schematic)
+4. Ceramic capacitor 100 nF X 2
+5. Resistor 1 k X 2
+6. Resistor 2 k
+7. Resistor 10 k
+8. Magnet (not shown in schematic)
 
 <div align="center">
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/schematics/BlueTachometer_schematic.png">
