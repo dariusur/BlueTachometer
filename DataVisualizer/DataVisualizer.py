@@ -6,12 +6,12 @@ import pandas as pd
 # USER PARAMETERS
 COM_PORT = 'COM6' # your COM port
 X_LIMIT = 100 # graph width
-Y_LIMIT = 100 # graph height
+Y_LIMIT = 5000 # graph height
 SAVE_DIRECTORY = r"C:\Users\Darius\Desktop\\"
 
 # CONSTANTS - DO NOT CHANGE!
 BAUD_RATE = 9600
-MCU_CLK_PERIOD = 8.33e-7 # 1.2 GHZ
+MCU_CLK_FREQUENCY = 1.2e6 # 833 ns
 
 # Called when the graph is closed.
 def on_close(event):
@@ -29,10 +29,12 @@ fig.canvas.mpl_connect('close_event', on_close)
 
 line, = ax1.plot([], lw=1)
 line.set_data(x, y)
-text = fig.text(0.5,0.9, "0.000 Hz")
+#text = fig.text(0.5,0.9, "0.000 Hz")
+text = fig.text(0.5,0.9, "0.000 RPM")
 
 ax1.set_xlabel('Sample')
-ax1.set_ylabel('Frequency, Hz')
+#ax1.set_ylabel('Frequency, Hz')
+ax1.set_ylabel('RPM')
 ax1.set_xlim([0, X_LIMIT])
 ax1.set_ylim([0, Y_LIMIT])
 ax1.minorticks_on()
@@ -48,12 +50,15 @@ fig.canvas.flush_events()
 
 # Discard the first measurement, because its always close to 0
 while(True):
-    if (ser.in_waiting > 0):
-        ser_data = ser.read(4)
-        break
+    try:
+        if (ser.in_waiting > 0):
+            ser_data = ser.read(4)
+            break
         
-    fig.canvas.draw()
-    fig.canvas.flush_events()
+        fig.canvas.draw()
+        fig.canvas.flush_events()
+    except:
+        break
 
 sample_counter = 0
 
@@ -66,9 +71,11 @@ while (True):
             for i in range(0, int(data_in/4)):    
                 sample_counter = sample_counter + 1
                 x = np.append(x, sample_counter)
-                y = np.append(y, 1/((ser_data[i*4]|(ser_data[i*4+1]<<8)|(ser_data[i*4+2]<<16)|(ser_data[i*4+3]<<24)) * MCU_CLK_PERIOD)) # convert time to frequency
+                #y = np.append(y, MCU_CLK_FREQUENCY / (ser_data[i*4]|(ser_data[i*4+1]<<8)|(ser_data[i*4+2]<<16)|(ser_data[i*4+3]<<24))) # convert time to frequency
+                y = np.append(y, MCU_CLK_FREQUENCY / (ser_data[i*4]|(ser_data[i*4+1]<<8)|(ser_data[i*4+2]<<16)|(ser_data[i*4+3]<<24)) * 60) # convert time to RPM
             
-            text.set_text('{:.3f} Hz'.format(y[sample_counter-1])) # update text
+            #text.set_text('{:.3f} Hz'.format(y[sample_counter-1])) # update text Hz
+            text.set_text('{:.3f} RPM'.format(y[sample_counter-1])) # update text RPM
             line.set_data(x, y) # update data
 
             # when sample_counter exceeds X_LIMIT move the graph window right to show the most recent sample
@@ -83,7 +90,8 @@ while (True):
 
 # Export collected data
 print("Number of samples: {}".format(y.size))
-data_export = pd.DataFrame(data=y, index=x, columns=['f, Hz'])
+#data_export = pd.DataFrame(data=y, index=x, columns=['f, Hz'])
+data_export = pd.DataFrame(data=y, index=x, columns=['RPM'])
 print("----------------------------------")
 print("Do you want to save data? (y/n)")
 save = input()
