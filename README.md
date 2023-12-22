@@ -1,5 +1,14 @@
 # BlueTachometer
 BlueTachometer is a wireless hall sensor based tachometer that transmits measured RPM (revolutions per minute) via Bluetooth. A Python script called "DataVisualizer" is used to monitor incoming data from the tachometer. After the measurement session is complete, the collected data can be saved in .csv format.
+
+<div align="center">
+  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/Fidget_spinner.png">
+  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/graphs/PC_cooling_fan.png">
+</div>
+<div align="center">
+  <i>Fig. 1. BlueTachometer schematic</i>
+</div>
+
 ## Hardware
 1. ATtiny13 microcontroller
 2. HC-05 Bluetooth module (https://components101.com/wireless/hc-05-bluetooth-module)
@@ -17,13 +26,29 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
   <i>Fig. 1. BlueTachometer schematic</i>
 </div>
 
+
 ## Implementation details
-BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magnet attached to a rotating object triggers the hall sensor which outputs a digital signal. An external pullup resistor is used to pull the line high. Hall sensor output is open-drain so upon activation it pulls the line low (active low signal). The measurement of the signal is performed by the MCU which executes the following algorithm: VISIO
+BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magnet attached to a rotating object triggers the hall sensor which outputs a digital signal. An external pullup resistor is used to pull the line high. Hall sensor output is open-drain so upon activation it pulls the line low (active low signal). The measurement of the signal is performed by the MCU which executes the following algorithm:
+
+<div align="center">
+  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/flowchart/ATtiny_flowchart.png">
+  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/signal_example.png">
+</div>
+<div align="center">
+  <i>Fig. 1. BlueTachometer schematic</i>
+</div>
+
+<div align="center">
+  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/signal_example.png">
+</div>
+<div align="center">
+  <i>Fig. 1. BlueTachometer schematic</i>
+</div>
 
 ### Working principle
 
 ### Specs
-* RPM measurement range: 0.017 to 19000 RPM.
+* RPM measurement range: 0.017 to 9000000 RPM.
 
 |Resolution|RPM|
 |---|---|
