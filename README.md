@@ -63,6 +63,8 @@ BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magn
 |<0.5|6000|
 |<0.1|2683|
 
+* Data rate = 125 samples per second (5000 bits/s)
+
 Resolution here means the minimal step by which RPM value can change. Meaning that when you are measuring, let's say, 18900 RPM, then the nearby RPM values that can be detected are either 18905 or 18895. The device cannot measure any values inbetween, say, 18902, or 18896. This is due to resolution limit which is set by the frequency of CPU clock (1.2 MHz). One important thing to mention here, is that the resolution depends on the RPM values that are being measured. The resolution is large at low RPM values and small at large RPM values. This characteristic is illustrated in Fig. 5. The graph shows that there are two limits, one is the 32 bit timer limit, which represents the greatest possible RPM value that can be stored within 32 bits. This limit could only be reached if MCU would perform the measurement on every clock cycle. However, instructions take time to execute, and in worst case scenario it takes 4 clock cycles to perform the measurement. This brings us to the other, measurement algorithm limit, which represents the greatest RPM value that the MCU can actually measure. Even though it is possible to measure up to 9000000 RPM, the resolution is so bad that the error is in the order of 100000s of RPM.
 
 <div align="center">
@@ -72,7 +74,7 @@ Resolution here means the minimal step by which RPM value can change. Meaning th
   <i>Fig. 5. Resolution graph, where timer count</i>
 </div>
 
-## Issues
-Reliability issue, packet identification
-Measures only every other period
-slow com speed
+## Issues and notes for further development
+* Currently there is a reliability issue, because there is no mechanism to track and prevent data loss during transmission. In addition there is no checking which byte of the four byte data packet is being read. When the first byte is being read, it is only assumed that it is the first byte. This leads to incorrect calculation of RPM. It seems like this issue can be avoided if the script is first started and only then the measurement is performed. The only time when this issue was observed is when the script is started during measurement.
+* Measures only every other signal period. This issue comes from the fact that Attiny13 has only one timer and it is used for both the measurement and UART communication. If there were at least two timers, then one timer could be dedicated solely for measurement, and instead of stopping, it could simply be reset and continue to measure during communication.
+* Data rate is slow. The communication speed could be improved if a greater baud rate was used. Also, pyserial read() function takes quite a significant time to execute (15-32 ms).
