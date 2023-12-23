@@ -5,7 +5,7 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/Fidget_spinner.png">
 </div>
 <div align="center">
-  <i>Fig. 1. DataVisualizer Python script showing showing RPM measurement of a fidget spinner</i>
+  <i>Fig. 1. DataVisualizer Python script showing RPM measurement of a fidget spinner</i>
 </div>
 
 ## Hardware
