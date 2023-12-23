@@ -14,10 +14,11 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
 3. Program the microcontroller using Microchip Studio.
 4. Configure HC-05 Bluetooth module: Slave mode, 9600 baud rate (default settings).
 5. Create a Python virtual environment that satisfies the requirements found in **DataVisualizer/requirements.txt**.
-6. Run the DataVisualizer Python script.
-7. Attach a magnet to a rotating object to be measured.
-8. Power up the tachometer.
-9. Measure RPM.
+6. Attach a magnet to a rotating object to be measured.
+7. Power up the tachometer.
+8. Switch on Bluetooth on your PC and pair it with HC-05.
+9. Run the DataVisualizer Python script.
+10. Measure RPM.
 
 ## Hardware
 1. ATtiny13 microcontroller.
@@ -53,7 +54,10 @@ BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magn
   <i>Fig. 4. Measurement algorithm shown on Hall sensor Vout signal captured with an oscilloscope.</i>
 </div>
 
-### Specifications
+### DataVisualizer
+DataVisualizer script uses 4 libraries: pyserial for communication with HC-05, matplotlib, numpy, pandas. 
+
+## Specifications
 * RPM measurement range: 0.017 to 9000000 RPM.
 
 |Resolution|RPM|
