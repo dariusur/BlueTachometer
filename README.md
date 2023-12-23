@@ -8,6 +8,17 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
   <i>Fig. 1. DataVisualizer Python script showing RPM measurement of a fidget spinner.</i>
 </div>
 
+## Installation
+1. Assemble the circuit
+2. Download repo
+3. Program the microcontroller using microchip studio
+4. Setup Hc-05 Bluetooth module
+5. Create a virtual environment that satisfies the requirements found in ///'requirements.txt'.
+6. Launch the script
+7. Power up the tachometer
+8. attach a magnet to a rotating object
+9. Measure RPM!
+
 ## Hardware
 1. ATtiny13 microcontroller
 2. HC-05 Bluetooth module (https://components101.com/wireless/hc-05-bluetooth-module)
@@ -61,11 +72,7 @@ Resolution here means the minimal step by which RPM value can change. Meaning th
   <i>Fig. 5. Resolution graph, where timer count</i>
 </div>
 
-### ATtiny13
-
-
-### HC-05
-
-### Hall sensor
-
 ## Issues
+Reliability issue, packet identification
+Measures only every other period
+slow com speed
