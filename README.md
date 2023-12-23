@@ -17,8 +17,9 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
 6. Attach a magnet to a rotating object to be measured.
 7. Power up the tachometer.
 8. Switch on Bluetooth on your PC and pair it with HC-05.
-9. Run the DataVisualizer Python script.
-10. Measure RPM.
+9. In the DataVisualizer Python script, configure the COM_PORT and SAVE_DIRECTORY parameters (X_LIMIT and Y_LIMIT are optional).
+10. Run the DataVisualizer Python script.
+11. Measure RPM.
 
 ## Hardware
 1. ATtiny13 microcontroller.
@@ -55,7 +56,13 @@ BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magn
 </div>
 
 ### DataVisualizer
-DataVisualizer script uses 4 libraries: pyserial for communication with HC-05, matplotlib, numpy, pandas. 
+DataVisualizer script uses 4 libraries:
+1. pyserial for communication with HC-05.
+2. matplotlib for data plotting.
+3. numpy for temporary data storage in numpy array.
+4. pandas for data export to .csv.
+
+Firstly, the script tries to open a serial port over Bluetooth to receive data from HC-05. If it succeeds, then the graph is configured (figure, labels, grid, etc). After that, an empty graph is displayed, and the script enters a loop and waits for data. The received data is converted to RPM and displayed on screen. Finally, after closing the figure window (click X), the script asks if data should be saved to .csv.
 
 ## Specifications
 * RPM measurement range: 0.017 to 9000000 RPM.
