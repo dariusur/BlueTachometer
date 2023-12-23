@@ -1,5 +1,5 @@
 # BlueTachometer
-BlueTachometer is a wireless hall sensor based tachometer that transmits measured RPM (revolutions per minute) via Bluetooth to PC. A Python script called "DataVisualizer" is used to plot incoming data from the tachometer (Fig. 1.). After the measurement session is complete, the collected data can be saved in .csv format.
+BlueTachometer is a wireless hall sensor based tachometer that transmits measured RPM (revolutions per minute) via Bluetooth to PC. A Python script called "DataVisualizer" is used to plot incoming data from the tachometer (Fig. 1). After the measurement session is complete, the collected data can be saved in .csv format.
 
 <div align="center">
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/Fidget_spinner.png">
@@ -26,14 +26,13 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
 </div>
 
 ## Implementation details
-BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magnet attached to a rotating object triggers the hall sensor which outputs a digital signal. Hall sensor output is open-drain so upon activation it pulls the line LOW (active LOW signal). An external pullup resistor is used to pull the line HIGH when the hall sensor is deactivated. The measurement of the signal is performed by the MCU which executes the algorithm shown in Fig. 3.
+BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magnet attached to a rotating object triggers the hall sensor which outputs a digital signal. Hall sensor output is open-drain so upon activation it pulls the line LOW (active LOW signal). An external pullup resistor is used to pull the line HIGH when the hall sensor is deactivated. The measurement of the signal is performed by the MCU which executes the program shown in Fig. 3. To get a better visual understanding, Fig. 4 shows how the MCU measures the signal step by step.
 
 <div align="center">
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/flowchart/ATtiny_flowchart.png">
-  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/signal_example.png">
 </div>
 <div align="center">
-  <i>Fig. 1. BlueTachometer schematic</i>
+  <i>Fig. 3. MCU program flowchart </i>
 </div>
 
 <div align="center">
