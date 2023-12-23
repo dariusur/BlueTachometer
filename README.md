@@ -58,7 +58,7 @@ Resolution here means the minimal step by which RPM value can change. Meaning th
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/graphs/resolution_graph.png">
 </div>
 <div align="center">
-  <i>Fig. 5. </i>
+  <i>Fig. 5. Resolution graph, where timer count</i>
 </div>
 
 ### ATtiny13
