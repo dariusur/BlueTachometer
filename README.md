@@ -34,12 +34,12 @@ BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magn
 <div align="center">
   <i>Fig. 3. MCU program flowchart </i>
 </div>
-
+<br></br>
 <div align="center">
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/signal_example.png">
 </div>
 <div align="center">
-  <i>Fig. 1. BlueTachometer schematic</i>
+  <i>Fig. 4. Measurement algorithm shown on Hall sensor Vout signal captured with an oscilloscope</i>
 </div>
 
 ### Working principle
