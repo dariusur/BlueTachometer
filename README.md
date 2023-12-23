@@ -13,7 +13,7 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
 2. Download and extract the repository ZIP file.
 3. Program the microcontroller using Microchip Studio.
 4. Configure HC-05 Bluetooth module: Slave mode, 9600 baud rate (default settings).
-5. Create a Python virtual environment that satisfies the requirements found in *DataVisualizer/requirements.txt*.
+5. Create a Python virtual environment that satisfies the requirements found in **DataVisualizer/requirements.txt**.
 6. Run the DataVisualizer Python script.
 7. Attach a magnet to a rotating object to be measured.
 8. Power up the tachometer.
