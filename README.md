@@ -26,7 +26,7 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
 </div>
 
 ## Implementation details
-BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magnet attached to a rotating object triggers the hall sensor which outputs a digital signal. Hall sensor output is open-drain so upon activation it pulls the line LOW (active LOW signal). An external pullup resistor is used to pull the line HIGH when the hall sensor is deactivated. The measurement of the signal is performed by the MCU which executes the program shown in Fig. 3. To get a better visual understanding, Fig. 4 shows how the MCU measures the signal step by step. Essentially, the MCU measures the period of the signal. The frequency can be obtained by taking the inverse of period $f = T^-1$
+BlueTachometer uses a hall sensor to detect presence of a magnetic field. A magnet attached to a rotating object triggers the hall sensor which outputs a digital signal. Hall sensor output is open-drain so upon activation it pulls the line LOW (active LOW signal). An external pullup resistor is used to pull the line HIGH when the hall sensor is deactivated. The measurement of the signal is performed by the MCU which executes the program shown in Fig. 3. To get a better visual understanding, Fig. 4 shows how the MCU measures the signal step by step. Essentially, the MCU measures the period of the signal. The frequency can be obtained by taking the inverse of period $f = T^{-1}$
 
 <div align="center">
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/flowchart/ATtiny_flowchart.png">
