@@ -9,25 +9,25 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
 </div>
 
 ## Installation
-1. Assemble the circuit
-2. Download repo
-3. Program the microcontroller using microchip studio
-4. Setup Hc-05 Bluetooth module
-5. Create a virtual environment that satisfies the requirements found in ///'requirements.txt'.
-6. Launch the script
-7. Power up the tachometer
-8. attach a magnet to a rotating object
-9. Measure RPM!
+1. Assemble the circuit.
+2. Download and extract the repository ZIP file.
+3. Program the microcontroller using Microchip Studio.
+4. Configure HC-05 Bluetooth module: Slave mode, 9600 baud rate (default settings).
+5. Create a Python virtual environment that satisfies the requirements found in *DataVisualizer/requirements.txt*.
+6. Run the DataVisualizer Python script.
+7. Attach a magnet to a rotating object to be measured.
+8. Power up the tachometer.
+9. Measure RPM.
 
 ## Hardware
-1. ATtiny13 microcontroller
-2. HC-05 Bluetooth module (https://components101.com/wireless/hc-05-bluetooth-module)
-3. A1120LUA-T Hall sensor
-4. 2 X Ceramic capacitor 100 nF
-5. 2 X Resistor 1 k
-6. Resistor 2 k
-7. Resistor 10 k
-8. NdFeB magnet Ø10x0.6mm N35 (not shown in schematic)
+1. ATtiny13 microcontroller.
+2. HC-05 Bluetooth module (https://components101.com/wireless/hc-05-bluetooth-module).
+3. A1120LUA-T Hall sensor.
+4. 2 X Ceramic capacitor 100 nF.
+5. 2 X Resistor 1 k.
+6. Resistor 2 k.
+7. Resistor 10 k.
+8. NdFeB magnet Ø10x0.6mm N35 (not shown in schematic).
 
 <div align="center">
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/schematics/BlueTachometer_schematic.png">
