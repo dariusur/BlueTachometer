@@ -82,7 +82,7 @@ Resolution here means the minimal step by which RPM value can change. Meaning th
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/graphs/untitled.png">
 </div>
 <div align="center">
-  <i>Fig. 5. Resolution graph, where timer count</i>
+  <i>Fig. 5. Resolution graph. Note that values below 7 RPM are not shown, but the graph should extend toward 0.017 RPM</i>
 </div>
 
 ## Issues and notes for further development
