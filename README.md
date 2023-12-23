@@ -16,7 +16,7 @@ BlueTachometer is a wireless hall sensor based tachometer that transmits measure
 5. 2 X Resistor 1 k
 6. Resistor 2 k
 7. Resistor 10 k
-8. Magnet (not shown in schematic)
+8. NdFeB magnet Ø10x0.6mm N35 (not shown in schematic)
 
 <div align="center">
   <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/schematics/BlueTachometer_schematic.png">
