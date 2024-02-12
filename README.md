@@ -18,7 +18,7 @@ BlueTachometer is a wireless Hall sensor-based tachometer that transmits measure
 |<0.5|6000|
 |<0.1|2683|
 
-* Data rate = 125 samples per second (5000 bits/s)
+* Data rate: up to 125 samples per second (5000 bits/s)
 
 Resolution depends on CPU clock frequency (1.2 MHz). The greater the frequency, the larger RPM values can be measured, but at a cost of resolution. This characteristic is illustrated in Fig. 5. The graph shows that there are two limits, one is the $f_{cpu}$ limit, which represents the greatest possible RPM value that can be measured. This limit could only be reached if MCU would measure every clock cycle. However, instructions take time to execute, and in the worst-case scenario, it takes 4 clock cycles to perform the measurement. This brings us to the other, measurement algorithm limit, which represents the greatest RPM value that the MCU can measure. Even though it is possible to measure up to 9000000 RPM, the resolution is so bad that the error is in the order of 100000s of RPM. In addition, there is one more limit that is not shown, which is the 32-bit timer limit, which sets the lowest possible RPM value that can be measured, which is 0.017.
 
