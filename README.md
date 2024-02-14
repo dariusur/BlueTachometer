@@ -2,10 +2,11 @@
 BlueTachometer is a wireless Hall sensor-based tachometer that transmits measured RPM (revolutions per minute) via Bluetooth to the PC. A Python script called "DataVisualizer" is used to plot incoming data from the tachometer (Fig. 1). After the measurement session is complete, the collected data can be saved in .csv format.
 
 <div align="center">
-  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/Fidget_spinner.png">
+  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/screenshots/Fidget_spinner.png" widht="300" height="300">
+  <img src="https://github.com/dariusur/BlueTachometer/blob/main/misc/images/BlueTachometer.jpg" widht="300" height="300">
 </div>
 <div align="center">
-  <i>Fig. 1. DataVisualizer Python script showing RPM measurement of a fidget spinner.</i>
+  <i>Fig. 1. One the left: hardware used for the project. On the right: DataVisualizer Python script showing RPM measurement of a fidget spinner.</i>
 </div>
 
 ## Specifications
